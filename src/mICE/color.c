@@ -35,3 +35,19 @@ void defineColor(int color, int r, int g, int b) {
 void clearColor() {
 	setColor(COLOR_WHITE, COLOR_BLACK);
 }
+
+void defineColorPair(int pair, int fg, int bg) {
+	init_pair(pair, fg, bg);
+}
+
+void useColorPair(int pair) {
+	attron(COLOR_PAIR(pair));
+}
+
+int numColors() {
+	return COLORS;
+}
+
+int numColorPairs() {
+	return COLOR_PAIRS;
+}
