@@ -9,6 +9,7 @@ void refreshScreen();
 int screenWidth();
 int screenHeight();
 int setScreenSize(int width, int height);
+void setScreenTitle(const char* s);
 
 // 0 No cursor
 // 1 Small cursor

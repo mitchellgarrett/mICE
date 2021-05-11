@@ -38,6 +38,10 @@ int setScreenSize(int width, int height) {
 	resize_term(height, width);
 }
 
+void setScreenTitle(const char* s) {
+	PDC_set_title(s);
+}
+
 void setCursor(int cursor) {
 	curs_set(cursor);
 }
