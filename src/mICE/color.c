@@ -2,7 +2,7 @@
 #include <mICE/screen.h>
 
 #ifdef _WIN32
-// https://github.com/wmcbrine/PDCurses/blob/master/docs/README.md
+#define PDC_WIDE
 #include <pdcurses/curses.h>
 #else
 // Use ncurses

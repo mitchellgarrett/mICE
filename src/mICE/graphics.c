@@ -2,8 +2,15 @@
 #include <mICE/screen.h>
 #include <stdlib.h>
 
+#ifdef _WIN32
+#define PDC_WIDE
+#include <pdcurses/curses.h>
+#else
+// Use ncurses
+#endif
+
 // Bresenham's line drawing algorithm
-void drawLine(int xi, int yi, int xf, int yf, char c) {
+void drawLine(int xi, int yi, int xf, int yf, unsigned long c) {
 	int dx = abs(xf - xi);
 	int sx = xi < xf ? 1 : -1;
 
@@ -29,7 +36,7 @@ void drawLine(int xi, int yi, int xf, int yf, char c) {
 	}
 }
 
-void drawLineHorizontal(int y, int xi, int xf, char c) {
+void drawLineHorizontal(int y, int xi, int xf, unsigned long c) {
 	int x = xi;
 	int dx = xi < xf ? 1 : -1;
 	xf += dx;
@@ -39,7 +46,7 @@ void drawLineHorizontal(int y, int xi, int xf, char c) {
 	}
 }
 
-void drawLineVertical(int x, int yi, int yf, char c) {
+void drawLineVertical(int x, int yi, int yf, unsigned long c) {
 	int y = yi;
 	int dy = yi < yf ? 1 : -1;
 	yf += dy;
@@ -49,11 +56,16 @@ void drawLineVertical(int x, int yi, int yf, char c) {
 	}
 }
 
-void fillBackground(char c) {
+void fillBackground(unsigned long c) {
+	/*if (c <= 255) {
+		bkgd(c);
+	} else {
+		bkgrnd(c);
+	}*/
 	drawBoxFill(0, 0, screenWidth(), screenHeight(), c);
 }
 
-void drawBox(int x, int y, int width, int height, char c) {
+void drawBox(int x, int y, int width, int height, unsigned long c) {
 	int xf = x + width - 1;
 	int yf = y + height - 1;
 	drawLineHorizontal(y, x, xf, c);
@@ -62,23 +74,32 @@ void drawBox(int x, int y, int width, int height, char c) {
 	drawLineVertical(xf, y, yf, c);
 }
 
-void drawBoxFill(int x, int y, int width, int height, char c) {
-	char* line = (char*)malloc(width);
+void drawBoxFill(int x, int y, int width, int height, unsigned long c) {
+	/*unsigned long* line = (unsigned long*)malloc(width * sizeof(unsigned long));
 	memset(line, c, width);
+
 	int yf = y + height;
 	for (; y < yf; ++y) {
 		printsat(x, y, line);
 	}
-	free(line);
+	free(line);*/
+	int xi = x;
+	int xf = x + width;
+	int yf = y + height;
+	for (; y < yf; ++y) {
+		for (x = xi; x < xf; ++x) {
+			printcat(x, y, c);
+		}
+	}
 }
 
-void drawBoxFillBorder(int x, int y, int width, int height, char border, char fill) {
+void drawBoxFillBorder(int x, int y, int width, int height, unsigned long border, unsigned long fill) {
 	drawBox(x, y, width, height, border);
 	drawBoxFill(x + 1, y + 1, width - 2, height - 2, fill);
 }
 
 // TODO
-void drawCircle(int x, int y, int r, char c) {
+void drawCircle(int x, int y, int r, unsigned long c) {
 	int cx = 0;
 	int cy = r;
 	int d = 3 - 2 * r;
@@ -114,11 +135,11 @@ void drawCircle(int x, int y, int r, char c) {
 }
 
 // TODO
-void drawCircleFill(int x, int y, int r, char c) {
+void drawCircleFill(int x, int y, int r, unsigned long c) {
 
 }
 
-void drawCircleFillBorder(int x, int y, int r, char border, char fill) {
+void drawCircleFillBorder(int x, int y, int r, unsigned long border, unsigned long fill) {
 	drawCircle(x, y, r, border);
 	drawCircleFill(x, y, r - 1, fill);
 }

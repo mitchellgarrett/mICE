@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #ifdef _WIN32
-// https://github.com/wmcbrine/PDCurses/blob/master/docs/README.md
+#define PDC_WIDE
 #include <pdcurses/curses.h>
 #else
 // Use ncurses
@@ -58,38 +58,38 @@ void flashScreen() {
 	flash();
 }
 
-void printc(char c) {
-	addch(c);
+void printc(unsigned long c) {
+	addrawch(c);
 }
 
-void printcat(int x, int y, char c) {
-	mvaddch(y, x, c);
+void printcat(int x, int y, unsigned long c) {
+	mvaddrawch(y, x, c);
 }
 
-void prints(const char* s) {
-	addstr(s);
+void prints(const unsigned long* s) {
+	addwstr(s);
 }
 
-void printsat(int x, int y, const char* s) {
-	mvaddstr(y, x, s);
+void printsat(int x, int y, const unsigned long* s) {
+	mvaddwstr(y, x, s);
 }
 
-void printsf(const char* fmt, ...) {
+void printsf(const unsigned long* fmt, ...) {
 	va_list args;
 	va_start(args, fmt);
-	char* output = (char*)malloc(screenWidth());
+	unsigned long* output = (unsigned long*)malloc(screenWidth() * sizeof(unsigned long));
 	vsprintf_s(output, screenWidth(), fmt, args);
-	printw(output);
+	prints(output);
 	free(output);
 	va_end(args);
 }
 
-void printsfat(int x, int y, const char* fmt, ...) {
+void printsfat(int x, int y, const unsigned long* fmt, ...) {
 	va_list args;
 	va_start(args, fmt);
-	char* output = (char*)malloc(screenWidth());
+	unsigned long* output = (unsigned long*)malloc(screenWidth() * sizeof(unsigned long));
 	vsprintf_s(output, screenWidth(), fmt, args);
-	mvprintw(y, x, output);
+	printsat(x, y, output);
 	free(output);
 	va_end(args);
 }
