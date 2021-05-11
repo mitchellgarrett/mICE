@@ -27,7 +27,7 @@ void printcat(int x, int y, unsigned long c);
 void prints(const unsigned long* s);
 void printsat(int x, int y, const unsigned long* s);
 
-void printsf(const unsigned long* fmt, ...);
-void printsfat(int x, int y, const unsigned long* fmt, ...);
+void printsf(const char* fmt, ...);
+void printsfat(int x, int y, const char* fmt, ...);
 
 #endif

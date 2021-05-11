@@ -78,22 +78,22 @@ void printsat(int x, int y, const unsigned long* s) {
 	mvaddwstr(y, x, s);
 }
 
-void printsf(const unsigned long* fmt, ...) {
+void printsf(const char* fmt, ...) {
 	va_list args;
 	va_start(args, fmt);
-	unsigned long* output = (unsigned long*)malloc(screenWidth() * sizeof(unsigned long));
+	char* output = (char*)malloc(screenWidth());
 	vsprintf_s(output, screenWidth(), fmt, args);
-	prints(output);
+	printw(output);
 	free(output);
 	va_end(args);
 }
 
-void printsfat(int x, int y, const unsigned long* fmt, ...) {
+void printsfat(int x, int y, const char* fmt, ...) {
 	va_list args;
 	va_start(args, fmt);
-	unsigned long* output = (unsigned long*)malloc(screenWidth() * sizeof(unsigned long));
+	char* output = (char*)malloc(screenWidth());
 	vsprintf_s(output, screenWidth(), fmt, args);
-	printsat(x, y, output);
+	mvprintw(y, x, output);
 	free(output);
 	va_end(args);
 }

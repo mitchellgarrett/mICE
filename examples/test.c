@@ -8,11 +8,11 @@ int main(int argc, char* argv[]) {
 	
 	setColor(CYAN, BLUE);
 
-	fillBackground(L'░');
-	printc(ACS_CKBOARD);
-	printc('#');
-	drawBoxFill(1, 1, 5, 5, ACS_CKBOARD);
-	printc(182 | A_ALTCHARSET);
+	//fillBackground(L'░');
+	//printc(ACS_CKBOARD);
+	//printc('#');
+	//drawBoxFill(1, 1, 5, 5, ACS_CKBOARD);
+	//printc(182 | A_ALTCHARSET);
 	//addwstr
 	//addchstr(ACS_CKBOARD);
 	//mvaddchstr(0, 0, "%d", ACS_CKBOARD);
@@ -20,12 +20,18 @@ int main(int argc, char* argv[]) {
 
 	// Width = 3/2 * Height
 	// Aspect ratio = 3:2
-	printsat(10, 10, L"######");
-	printsat(10, 11, L"######");
-	printsat(10, 12, L"######");
-	printsat(10, 13, L"######");
+	//printsat(10, 10, L"######");
+	//printsat(10, 11, L"######");
+	//printsat(10, 12, L"######");
+	//printsat(10, 13, L"######");
 
-	while (getKey() != 'q');
+	initTime();
+	while (getKey() != 'q') {
+		updateTime();
+		clearScreen();
+		printsfat(0, 0, "%f", deltaTime());
+		printsfat(0, 1, "%f", getTime());
+	}
 
 	closeScreen();
 
