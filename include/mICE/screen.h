@@ -10,6 +10,9 @@ int screenWidth();
 int screenHeight();
 int setScreenSize(int width, int height);
 
+// 0 No cursor
+// 1 Small cursor
+// 2 Big cursor
 void setCursor(int cursor);
 void moveCursor(int x, int y);
 

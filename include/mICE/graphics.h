@@ -6,10 +6,12 @@ void drawLineHorizontal(int y, int xi, int xf, char c);
 void drawLineVertical(int x, int yi, int yf, char c);
 
 void fillBackground(char c);
-void drawBox(int xi, int yi, int xf, int yf, char c);
-void drawBoxFill(int xi, int yi, int xf, int yf, char c);
+void drawBox(int x, int y, int width, int height, char c);
+void drawBoxFill(int x, int y, int width, int height, char c);
+void drawBoxFillBorder(int x, int y, int width, int height, char border, char fill);
 
-void drawCircle(int cx, int cy, int r, char c);
-void drawCircleFill(int cx, int cy, int r, char c);
+void drawCircle(int x, int y, int r, char c);
+void drawCircleFill(int x, int y, int r, char c);
+void drawCircleFillBorder(int x, int y, int r, char border, char fill);
 
 #endif
