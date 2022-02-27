@@ -6,7 +6,7 @@
 #define PDC_WIDE
 #include <pdcurses/curses.h>
 #else
-// Use ncurses
+#include <ncurses.h>
 #endif
 
 void initScreen() {
@@ -62,19 +62,19 @@ void flashScreen() {
 	flash();
 }
 
-void printc(unsigned long c) {
+void printc(char c) {
 	addrawch(c);
 }
 
-void printcat(int x, int y, unsigned long c) {
+void printcat(int x, int y, char c) {
 	mvaddrawch(y, x, c);
 }
 
-void prints(const unsigned long* s) {
+void prints(const char* s) {
 	addwstr(s);
 }
 
-void printsat(int x, int y, const unsigned long* s) {
+void printsat(int x, int y, const char* s) {
 	mvaddwstr(y, x, s);
 }
 

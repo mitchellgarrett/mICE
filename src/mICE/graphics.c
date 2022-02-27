@@ -6,7 +6,7 @@
 #define PDC_WIDE
 #include <pdcurses/curses.h>
 #else
-// Use ncurses
+#include <ncurses.h>
 #endif
 
 // Bresenham's line drawing algorithm

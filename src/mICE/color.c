@@ -5,7 +5,7 @@
 #define PDC_WIDE
 #include <pdcurses/curses.h>
 #else
-// Use ncurses
+#include <ncurses.h>
 #endif
 
 int initScreenColor() {
