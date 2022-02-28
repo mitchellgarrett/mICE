@@ -1,4 +1,4 @@
-#ifndef M_ICE_GRAPHCS
+#ifndef M_ICE_GRAPHICS
 #define M_ICE_GRAPHICS
 
 void drawLine(int xi, int yi, int xf, int yf, unsigned long c);
